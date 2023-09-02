@@ -1,0 +1,17 @@
+commentary = """
+mypy is the reference implementation for this PEP. Its behaviour is standard.
+"""
+output = """
+main.py:14: note: Revealed type is "def (x: Any, y: Any) -> Any"
+main.py:15: note: Revealed type is "Any"
+main.py:22: note: Revealed type is "def (annotated: builtins.int, x: Any, y: Any) -> Any"
+main.py:32: note: Revealed type is "main.MethodFirstArg"
+main.py:38: note: Revealed type is "Type[main.MethodFirstArg]"
+main.py:60: note: Revealed type is "def (self: main.BuiltinDecorators) -> builtins.int"
+main.py:61: note: Revealed type is "def () -> builtins.int"
+main.py:63: note: Revealed type is "def () -> builtins.int"
+main.py:67: note: Revealed type is "builtins.int"
+main.py:69: note: Revealed type is "def () -> builtins.int"
+main.py:71: note: Revealed type is "def () -> builtins.int"
+Success: no issues found in 1 source file
+"""

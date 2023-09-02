@@ -1,0 +1,28 @@
+commentary = """
+pyright's behaviour is mostly standard, but there are a couple instances of intentionally
+nonstandard behaviour:
+
+pyright does not support no_type_check.
+https://github.com/microsoft/pyright/issues/1448#issuecomment-772661004
+
+pyright often does not default to Any in the case of missing annotations. For instance, it will
+infer unannotated return types from return statements, do callsite return type inference, infer
+parameters from base classes and default values, etc.
+"""
+
+output = """
+/main.py
+  /main.py:14:13 - information: Type of "unannotated" is "(x: Unknown, y: Unknown) -> None"
+  /main.py:15:13 - information: Type of "annotated_no_type_check" is "(x: int, y: str) -> int"
+  /main.py:22:17 - information: Type of "checked" is "(annotated: int, x: Unknown, y: Unknown) -> None"
+  /main.py:23:17 - error: "assert_type" mismatch: expected "Any" but received "None" (reportGeneralTypeIssues)
+  /main.py:32:21 - information: Type of "self" is "Self@MethodFirstArg"
+  /main.py:38:21 - information: Type of "cls" is "Type[Self@MethodFirstArg]"
+  /main.py:60:17 - information: Type of "BuiltinDecorators.prop" is "property"
+  /main.py:61:17 - information: Type of "BuiltinDecorators.static" is "() -> int"
+  /main.py:63:17 - information: Type of "BuiltinDecorators.cls" is "() -> int"
+  /main.py:67:17 - information: Type of "builtin_decorators.prop" is "int"
+  /main.py:69:17 - information: Type of "builtin_decorators.static" is "() -> int"
+  /main.py:71:17 - information: Type of "builtin_decorators.cls" is "() -> int"
+1 error, 0 warnings, 11 informations
+"""
