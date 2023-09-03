@@ -1,0 +1,30 @@
+commentary = """
+pyright does not narrow via isinstance(x, Callable)
+pyright does not forbid narrowing via isinstance(x, Callable[[int], str])
+pyright should complain about type variable redefinition.
+"""
+output = """
+/main.py
+  /main.py:32:30 - error: Illegal type annotation: call expression not allowed (reportGeneralTypeIssues)
+  /main.py:58:7 - error: Argument of type "Literal[1]" cannot be assigned to parameter "url" of type "Url" in function "retry"
+    "Literal[1]" is incompatible with "Url" (reportGeneralTypeIssues)
+  /main.py:69:12 - error: Expression of type "int* | float* | complex* | Literal[0]" cannot be assigned to return type "T_ifc@inproduct"
+    Type "int* | float* | complex* | Literal[0]" cannot be assigned to type "T_ifc@inproduct" (reportGeneralTypeIssues)
+  /main.py:75:12 - error: Expression of type "int* | float* | complex* | Literal[0]" cannot be assigned to return type "T_ifc@inproduct_noalias"
+    Type "int* | float* | complex* | Literal[0]" cannot be assigned to type "T_ifc@inproduct_noalias" (reportGeneralTypeIssues)
+  /main.py:101:8 - error: Argument of type "() -> int" cannot be assigned to parameter "get_next_item" of type "() -> str" in function "feeder"
+    Type "() -> int" cannot be assigned to type "() -> str"
+      Function return type "int" is incompatible with type "str"
+        "int" is incompatible with "str" (reportGeneralTypeIssues)
+  /main.py:119:21 - information: Type of "o" is "Never"
+  /main.py:121:21 - information: Type of "o" is "object"
+  /main.py:143:33 - error: Illegal type annotation: call expression not allowed (reportGeneralTypeIssues)
+  /main.py:144:1 - error: TypeVar must be assigned to a variable named "Match"
+  /main.py:157:15 - error: Argument of type "Literal[b"bar"]" cannot be assigned to parameter "y" of type "AnyStr@concat" in function "concat"
+    "Literal[b"bar"]" is incompatible with "str" (reportGeneralTypeIssues)
+  /main.py:158:16 - error: Argument of type "Literal['bar']" cannot be assigned to parameter "y" of type "AnyStr@concat" in function "concat"
+    "Literal['bar']" is incompatible with "bytes" (reportGeneralTypeIssues)
+  /main.py:162:42 - error: TypeVar must have at least two constrained types (reportGeneralTypeIssues)
+  /main.py:224:30 - error: Type arguments for "Generic" must be unique
+11 errors, 0 warnings, 2 informations
+"""

@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 def default_command_for(type_checker: str) -> str:
     if type_checker == "mypy":
-        return "mypy main.py"
+        return "mypy main.py --disable-error-code empty-body"
     elif type_checker == "pyright":
         return "pyright main.py"
     raise ValueError(f"Unknown type checker: {type_checker}")

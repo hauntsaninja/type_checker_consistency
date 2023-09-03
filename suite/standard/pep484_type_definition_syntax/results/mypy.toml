@@ -1,0 +1,27 @@
+commentary = """
+mypy has some behaviour that is subject to change:
+
+mypy should allow narrowing via isinstance(x, Callable)
+"""
+output = """
+main.py:32: error: Invalid type comment or annotation  [valid-type]
+main.py:32: note: Suggestion: use eval[...] instead of eval(...)
+main.py:58: error: Argument 1 to "retry" has incompatible type "int"; expected "str"  [arg-type]
+main.py:101: error: Argument 1 to "feeder" has incompatible type "Callable[[], int]"; expected "Callable[[], str]"  [arg-type]
+main.py:118: error: Argument 2 to "isinstance" has incompatible type "<typing special form>"; expected "_ClassInfo"  [arg-type]
+main.py:119: note: Revealed type is "builtins.object"
+main.py:120: error: Argument 2 to "isinstance" has incompatible type "object"; expected "_ClassInfo"  [arg-type]
+main.py:121: note: Revealed type is "builtins.object"
+main.py:143: error: Invalid type comment or annotation  [valid-type]
+main.py:143: note: Suggestion: use TypeVar[...] instead of TypeVar(...)
+main.py:144: error: String argument 1 "Match" to TypeVar(...) does not match variable name "DoesNotMatch"  [misc]
+main.py:146: error: Cannot redefine "Redefined" as a type variable  [misc]
+main.py:146: error: Invalid assignment target  [misc]
+main.py:157: error: Value of type variable "AnyStr" of "concat" cannot be "Sequence[object]"  [type-var]
+main.py:158: error: Value of type variable "AnyStr" of "concat" cannot be "Sequence[object]"  [type-var]
+main.py:162: error: TypeVar cannot have only a single constraint  [misc]
+main.py:224: error: Duplicate type variables in Generic[...] or Protocol[...]  [misc]
+main.py:244: error: Cannot redefine "T" as a type variable  [misc]
+main.py:244: error: Invalid assignment target  [misc]
+Found 15 errors in 1 file (checked 1 source file)
+"""
