@@ -1,3 +1,8 @@
+## Update
+
+This work evolved into [PEP 729](https://peps.python.org/pep-0729/) for Typing Governance
+and the [typing spec conformance test suite](https://github.com/python/typing/tree/main/conformance).
+
 # type_checker_consistency
 
 ## Motivation
